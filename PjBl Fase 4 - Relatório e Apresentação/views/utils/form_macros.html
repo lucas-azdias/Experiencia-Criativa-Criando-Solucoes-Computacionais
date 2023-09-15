@@ -1,0 +1,122 @@
+{% import "utils/macros.html" as macros %}
+
+{% macro input(label='', placeholder='', id='', name='', type='text', extra_params='', box_size=12, has_box_size=false, is_start=true,
+is_end=true) %}
+    {% if is_start %}
+    <div class="row my-3 mx-4 justify-content-around">
+        {% endif %}
+        {{ macros.input(label=label, placeholder=placeholder, id=id, name=name, type=type, extra_params=extra_params, box_size=box_size, has_box_size=has_box_size) }}
+        {% if is_end %}
+    </div>
+    {% endif %}
+{% endmacro %}
+
+{% macro other_input(label='', id='', name='', value='', type='text', readonly=false) %}
+    <div class="row my-3 mx-4 justify-content-around">
+        <div class="col">
+            <label for="{{ id }}" class="form-label">{{ label }}</label>
+            <input type="{{ type }}" id="{{ id }}" name="{{ name }}" class="form-control" value="{{ value }}" {% if readonly %}readonly{% endif %}>
+        </div>
+    </div>
+{% endmacro %}
+
+
+{% macro select(options, label='', placeholder='', id='', name='', box_size=12, has_box_size=false, is_start=true, is_end=true) %}
+    {% if is_start %}
+    <div class="row my-3 mx-4">
+    {% endif %}
+        {{ macros.select(options, label, placeholder, id, name, box_size, has_box_size) }}
+    {% if is_end %}
+    </div>
+    {% endif %}
+{% endmacro%}
+
+{% macro button(label='', id='', style='center', type='submit') %}
+    <div class="row my-4 mb-0">
+        <div class="col mx-4 {{ 'd-flex justify-content-center' if style == 'center' else '' }}">
+            <button id="{{ id }}" type="{{ type }}" class="btn btn-primary" {{ 'style="float: ' + style + ';"' if
+                style=='left' or style=='right' else '' }}">{{ label }}</button>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro formdivrow_start(id='', col_size='6') %}
+    <div class="row my-5 justify-content-center">
+        <div class="col-{{ col_size }}">
+            <div id="{{ id }}" class="container forms shadow-sm p-3 bg-white border border-secondary rounded">
+                {% endmacro %}
+
+                {% macro formdivrow_end() %}
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro form_start(id='', action='') %}
+    <form id="{{ id }}" action="{{ action }}" method="POST" class="mx-3 mb-0 justify-content-center">
+{% endmacro %}
+
+{% macro form_end() %}
+    </form>
+{% endmacro %}
+
+{% macro title(label='') %}
+    <div class="row my-4">
+        <div class="col mx-4">
+            <h3>{{ label }}</h3>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro subtitle(label='') %}
+    <div class="row my-4">
+        <div class="col mx-4">
+            <h5>{{ label }}</h5>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro text(label='') %}
+    <div class="row my-4">
+        <div class="col mx-4">
+            <h6>{{ label }}</h6>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro br() %}
+    <div class="row my-4"></div>
+{% endmacro %}
+
+{% macro endlabel(label='', link='', is_link=false) %}
+    <div class="row my-4 justify-content-center">
+        <div class="col-md-auto">
+            <span>
+                {% if is_link %}
+                <a href="{{ link }}">{{ label }}</a>
+                {% else %}
+                {{ label }}
+                {% endif %}
+            </span>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro render_sensor_select(sensors, selected_sensor) %}
+<div class="row my-3 mx-4 justify-content-around">
+    <a>{{  selected_sensor }} </a>
+    <div class="col-md-0 offset-md-0">
+        <label for="id_sensor" class="form-label">Selecione o sensor</label>
+        <select id="id_sensor" name="id_sensor" class="form-control">
+            <option value="" select disabled></option>
+            {% for sensor in sensors %}
+                {% if sensor.id_sensor == selected_sensor %}
+                    <option value="{{ sensor.id_sensor }}" selected>{{ sensor.name }}</option>
+                {% else %}
+                    <option value="{{ sensor.id_sensor }}">{{ sensor.name }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+    </div>
+</div>
+{% endmacro %}

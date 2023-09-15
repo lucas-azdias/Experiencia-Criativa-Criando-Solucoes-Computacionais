@@ -1,0 +1,33 @@
+{% extends "template.html" %}
+
+{% import "utils/page_macros.html" as page_macros %}
+{% import "utils/form_macros.html" as form_macros %}
+
+{% block title %}
+<title>Update: {{ plant.name }}</title>
+{% endblock %}
+
+{% block content %}
+<p><a href=".">Voltar</a></p>
+<div class="container">
+    {{ page_macros.flash_verifier() }}
+
+    {{ form_macros.formdivrow_start("/<int:id_plant>", "10") }}
+
+    {{ form_macros.form_start("form", "/plants/save_plant_changes/" + id_plant) }}
+
+    {{ form_macros.title(plant.name) }}
+
+    {{ form_macros.render_sensor_select(sensors,plant.id_sensor) }}
+    {{ form_macros.other_input(label='Umidade mínima', id='min_humidity', name='min_humidity', value=plant.min_humidity) }}
+
+    {{ form_macros.button(label='Atualizar') }}
+
+    {{ form_macros.form_end() }}
+
+    {{ form_macros.formdivrow_end() }}
+
+    {{ page_macros.endlabel("Voltar ao início", "/", is_link=true) }}
+</div>
+
+  {% endblock %}

@@ -1,0 +1,32 @@
+{% macro input(label='', placeholder='', id='', name='', type='text', extra_params="", value = '', box_size=12, has_box_size=false) %}
+    {% if not has_box_size %}
+    <div class="col">
+    {% else %}
+    <div class="col-{{ box_size }}">
+    {% endif %}
+        <label for="{{ id }}" class="form-label">{{ label }}</label>
+        <input placeholder="{{ placeholder }}" type="{{ type }}" class="form-control" id="{{ id }}" name="{{ name }}" value = "{{ value }}" required {{ extra_params }}>
+    </div>
+{% endmacro %}
+
+{% macro select(options, label='', placeholder='', id='', name='', box_size=12, has_box_size=false) %}
+    {% if not has_box_size %}
+    <div class="col">
+    {% else %}
+    <div class="col-{{ box_size }}">
+    {% endif %}
+        <label for="{{ id }}" class="form-label">{{ label }}</label>
+        <select id="{{ id }}" name="{{ name }}" class="form-control">
+            <option value="{{ placeholder }}" selected disabled></option>
+            {% for k, v in options|dictsort %}
+            <option value="{{ k }}">{{ v }}</option>
+            {% endfor %}
+        </select>
+    </div>
+{% endmacro%}
+
+{% macro msg_alert(msg='', category='') %}
+<div class="alert alert-{{ category if category in ['sucess', 'warning', 'danger'] else 'primary' }} d-flex justify-content-center">
+    <span>{{ msg }}</span>
+</div>
+{% endmacro %}

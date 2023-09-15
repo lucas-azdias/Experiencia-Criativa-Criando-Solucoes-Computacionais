@@ -1,0 +1,273 @@
+{% import "utils/page_macros.html" as page_macros %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+    
+    <head>
+        <title>Gerenciador de Jardins</title>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Favicons -->
+        <link href="/static/img/planta_t.png" rel="icon">
+        <link href="/static/img/apple-touch-icon.png" rel="apple-touch-icon">
+        
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+        
+        <!-- CSS Files -->
+        <link href="/static/css/vendor/aos.css" rel="stylesheet">
+        <link href="/static/css/vendor/bootstrap.min.css" rel="stylesheet">
+        <link href="/static/css/vendor/bootstrap-icons.css" rel="stylesheet">
+        <link href="/static/css/vendor/boxicons.min.css" rel="stylesheet">
+        <link href="/static/css/vendor/glightbox.min.css" rel="stylesheet">
+        <link href="/static/css/vendor/swiper-bundle.min.css" rel="stylesheet">
+
+        <!-- Template Main CSS File -->
+        <link href="/static/css/style.css" rel="stylesheet">
+        <link href="/static/css/bootstrap_changes.css" rel="stylesheet">
+
+        {% block head %}
+        {% endblock %}
+    </head>
+
+    <body>
+        <!-- ======= Hero Section ======= -->
+        <section id="hero">
+            <div class="hero-container">
+                <a href="#hero" class="hero-logo" data-aos="zoom-in"><img src="../static/img/planta_t.png" alt=""></a>
+                <h1 data-aos="zoom-in">Seja bem-vindo ao seu Gerenciador de Jardim</h1>
+                <h2 data-aos="fade-up">Para o seu bem e de suas plantas também</h2>
+            </div>
+        </section>
+        <!-- End Hero -->
+
+        <!-- ======= Header ======= -->
+        {% include "header.html" %}
+        <!-- End Header -->
+
+        <!-- ======= Main ======= -->
+        <main id="main">
+            <!-- ======= About Us Section ======= -->
+            <section id="about" class="about">
+                <div class="container">
+                    <div class="section-title" data-aos="fade-up">
+                        {{ page_macros.flash_verifier() }}
+                        <h2>Sobre nós</h2>
+                        <p>Os alunos responsáveis pelo projeto</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6" data-aos="fade-right">
+                            <div class="image">
+                                <img src="../static/img/meio-ambiente-fb.jpg" class="img-fluid" alt="">
+                            </div>
+                        </div>
+                        <div class="col-lg-6" data-aos="fade-left">
+                            <div class="content pt-4 pt-lg-0 pl-0 pl-lg-3 ">
+                                <h3>Estudantes da Pontífica Universidade Católica do Paraná (PUCPR)</h3>
+                                <p class="fst-italic">
+                                    Desenvolvendo um sistema que se responsabiliza em avisar você sobre a umidade de suas
+                                    plantas em tempo real
+                                </p>
+                                <ul>
+                                    <li><i class="bx bx-check-double"></i> Você se sente confortável para fazer outras coisas.
+                                    </li>
+                                    <li><i class="bx bx-check-double"></i> Suas plantas não morrerão mais de desidratação.</li>
+                                    <li><i class="bx bx-check-double"></i> Uma casa verde e aconchegante.</li>
+                                </ul>
+                                <p>
+                                    Tão importante quanto semear flores, são semear ideias. Fale com outras pessoas sobre a
+                                    importância de cuidar do planeta. Você vai estar contribuindo para o florescimento de uma
+                                    ótima causa.”
+                                    -Deivison Cavalcante Pedroza
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End About Us Section -->
+
+            <!-- ======= Services Section ======= -->
+            <section id="services" class="services">
+                <div class="container">
+                    <div class="section-title" data-aos="fade-up">
+                        <h2>Sistemas de Controle</h2>
+                        <p>Para medidas concretas e constantes é necessario as ferramentas certas </p>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 order-2 order-lg-1">
+                            <div class="icon-box mt-5 mt-lg-0" data-aos="fade-up">
+                                <i onfocus="cursor:pointer" class="bx bx-cube-alt "></i>
+                                <h4>Micro-controlador ESP32</h4>
+                                <p>Pequeno suficiente para não ser difícil de guardar com potência suficiente para processar o
+                                    que você precisar</p>
+                            </div>
+                            <div class="icon-box mt-5" data-aos="fade-up" data-aos-delay="100">
+                                <i class="bx bx-receipt"></i>
+                                <h4>Sensor de Umidade</h4>
+                                <p>Este trará as leituras necessárias para manter suas plantas saudáveis</p>
+                            </div>
+                        </div>
+                        <div class="image col-lg-6 order-1 order-lg-2"
+                            style='background-image: url("../static/img/meio-ambiente-1200x628.jpg");' data-aos="fade-left"
+                            data-aos-delay="100"></div>
+                    </div>
+                </div>
+            </section>
+            <!-- End Services Section -->
+
+            <!-- ======= Team Section ======= -->
+            <section id="team" class="team">
+                <div class="container">
+                    <div class="section-title" data-aos="fade-up">
+                        <h2>Time</h2>
+                        <p>Do pó se fez um site</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                            <div class="member" data-aos="zoom-in">
+                                <div class="member-img">
+                                    <img src="../static/img/team/LucasAzevedo_ProfilePic.jpg" class="img-fluid" alt="">
+                                    <div class="social">
+                                        <a href=""><i class="bi bi-twitter"></i></a>
+                                        <a href=""><i class="bi bi-facebook"></i></a>
+                                        <a href=""><i class="bi bi-instagram"></i></a>
+                                        <a href=""><i class="bi bi-linkedin"></i></a>
+                                    </div>
+                                </div>
+                                <div class="member-info">
+                                    <h4>Lucas Azevedo</h4>
+                                    <span>Chief Executive Officer</span>
+                                    <p>Animi est delectus alias quam repellendus nihil nobis dolor. Est sapiente occaecati et
+                                        dolore. Omnis aut ut nesciunt explicabo qui. Eius nam deleniti ut omnis</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                            <div class="member" data-aos="zoom-in" data-aos-delay="100">
+                                <div class="member-img">
+                                    <img src="../static/img/team/Camile_ProfilePic.jpg" class="img-fluid" alt="">
+                                    <div class="social">
+                                        <a href=""><i class="bi bi-twitter"></i></a>
+                                        <a href=""><i class="bi bi-facebook"></i></a>
+                                        <a href=""><i class="bi bi-instagram"></i></a>
+                                        <a href=""><i class="bi bi-linkedin"></i></a>
+                                    </div>
+                                </div>
+                                <div class="member-info">
+                                    <h4>Camily Pereira Albres</h4>
+                                    <span>Product Manager</span>
+                                    <p>Aspernatur iste esse aliquam enim et corporis. Molestiae voluptatem aut eligendi quis
+                                        aut. Libero vel amet voluptatem eos rerum non doloremque</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                            <div class="member" data-aos="zoom-in" data-aos-delay="200">
+                                <div class="member-img">
+                                    <img src="../static/img/team/MK_ProfilePic.jpg" class="img-fluid" alt="">
+                                    <div class="social">
+                                        <a href=""><i class="bi bi-twitter"></i></a>
+                                        <a href=""><i class="bi bi-facebook"></i></a>
+                                        <a href=""><i class="bi bi-instagram"></i></a>
+                                        <a href=""><i class="bi bi-linkedin"></i></a>
+                                    </div>
+                                </div>
+                                <div class="member-info">
+                                    <h4>Matheus Kozak</h4>
+                                    <span>CTO</span>
+                                    <p>Ut enim possimus nihil cupiditate beatae. Veniam facere quae non qui necessitatibus rerum
+                                        eos vero. Maxime sit sunt quo dolor autem est qui quaerat</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End Team Section -->
+
+            <!-- ======= Contact Section ======= -->
+            <section id="contact" class="contact section-bg">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Contato</h2>
+                        <p>A melhora vem com o feedback daqueles que querem ajudar</p>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-4">
+                            <div class="info d-flex flex-column justify-content-center" data-aos="fade-right">
+                                <div class="address">
+                                    <i class="bi bi-geo-alt"></i>
+                                    <h4>Localização:</h4>
+                                    <p>Rua Imaculada Conceição<br>Curitiba, 1155</p>
+                                </div>
+                                <div class="email">
+                                    <i class="bi bi-envelope"></i>
+                                    <h4>Email:</h4>
+                                    <p>comercial@gj.com.br</p>
+                                </div>
+                                <div class="phone">
+                                    <i class="bi bi-phone"></i>
+                                    <h4>Ligue:</h4>
+                                    <p>+55 (41) 99999-9999</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End Contact Section -->
+        </main>
+        <!-- End Main -->
+
+        <!-- ======= Footer ======= -->
+        <footer id="footer">
+            <div class="footer-top">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6">
+                            <a href="#header" class="scrollto footer-logo"><img src="../static/img/planta_t.png" alt=""></a>
+                            <h3>GJ</h3>
+                            <p>Você e sua planta felizes e saudáveis.</p>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                        <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                        <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                        <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="container footer-bottom clearfix">
+                <div class="copyright">
+                    &copy; Copyright <strong><span>Knight</span></strong>. All Rights Reserved
+                </div>
+                <div class="credits">
+                    <!-- All the links in the footer should remain intact. -->
+                    <!-- You can delete the links only if you purchased the pro version. -->
+                    <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                    <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/knight-free-bootstrap-theme/ -->
+                    Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                </div>
+            </div>
+        </footer>
+        <!-- End Footer -->
+
+        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    </body>
+
+    <!-- JS Files -->
+    <script src="/static/js/vendor/aos.js"></script>
+    <script src="/static/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/vendor/glightbox.min.js"></script>
+    <script src="/static/js/vendor/isotope.pkgd.min.js"></script>
+    <script src="/static/js/vendor/swiper-bundle.min.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/utils.js"></script>
+
+</html>

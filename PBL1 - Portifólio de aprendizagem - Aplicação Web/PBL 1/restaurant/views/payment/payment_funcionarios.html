@@ -1,0 +1,108 @@
+{% extends "payment/payment_index.html" %}
+
+{% block head %}
+    <script defer>
+        async function getSalarioById() {
+            var formIdFunc = document.getElementById("formIdFunc");
+            var valor = document.getElementById("valor");
+            var valor_num = document.getElementById("valor_num");
+
+            if (document.getElementById("id_func_select").value != "") {
+                var dataForm = new FormData(formIdFunc);
+
+                var response = await fetch("get_salario_funcionario", {
+                    method: "POST",
+                    body: dataForm
+                });
+
+                var salario = JSON.parse(await response.text())[1];
+
+                if (isFinite(salario)) {
+                    valor.innerHTML = 'TOTAL: R$' + salario.toFixed(2);
+
+                    if (valor.hasAttribute("hidden")) {
+                        valor.removeAttribute("hidden");
+                    }
+
+                    valor_num.value = salario;
+                } else {
+                    console.log("Salário recebido inválido.")
+
+                    if (!valor.hasAttribute("hidden")) {
+                        valor.setAttribute("hidden", "");
+                    }
+                    valor.innerHTML = "";
+
+                    valor_num.value = null;
+                }
+            } else {
+                console.log("Valores inválidos.")
+
+                if (!valor.hasAttribute("hidden")) {
+                    valor.setAttribute("hidden", "");
+                }
+                valor.innerHTML = "";
+
+                valor_num.value = null;
+            }
+        }
+        
+        async function submitEfetuarPagamentoFunc() {
+            if (document.getElementById("id_func_select").value != "" && document.getElementById("valor").innerHTML != "") {
+                document.getElementById("id_func").value = document.getElementById("id_func_select").value;
+                document.getElementById("cur_time").value = (new Date()).toLocaleString();
+
+                var dataForm = new FormData(document.getElementById("form"));
+
+                response = await fetch("save_payment_funcionario", {
+                    method: "POST",
+                    body: dataForm
+                });
+
+                window.location.href = await response.text();
+            } else {
+                console.log("Valores inválidos.")
+            }
+        }
+    </script>
+{% endblock %}
+
+{% block content %}
+    <h2>Efetuar pagamento - funcionário</h2>
+    {% if id_funcs|length != 0 %}
+        <form id="formIdFunc" method="POST">
+            <p>
+                <select id="id_func_select" name="id_func_select" onchange="getSalarioById()">
+                    <option value="" selected disabled>Selecione o ID do funcionário</option>
+                    {% for id_func in id_funcs %}
+                    <option value="{{ id_func }}">Funcionário {{ id_func }}</option>
+                    {% endfor %}
+                </select>
+            </p>
+        </form>
+        <form id="form" method="POST">
+            <p id="valor" hidden></p>
+            <input type="hidden" id="id_func" name="id_func">
+            <input type="hidden" id="valor_num" name="valor_num">
+            <input type="hidden" id="cur_time" name="cur_time">
+            <button type="button" onclick="submitEfetuarPagamentoFunc()">Efetuar pagamento do funcionário</button>
+        </form>
+    {% else %}
+        <p>Não há funcionários cadastrados.</p>
+    {% endif %}
+    
+    <h2>Salários pagos dos funcionários</h2>
+    {% if salarios_funcs_pagos|length != 0 %}
+        <p>
+            <ul>
+                {% for salario_func_pago in salarios_funcs_pagos|sort %}
+                <li>Funcionário {{ salario_func_pago[0] }}: {{ salario_func_pago[1] }} reais (Pago em: {{ salario_func_pago[2] }})</li>
+                {% endfor %}
+            </ul>
+        </p>
+    {% else %}
+        <p>Não há salários pagos registrados.</p>
+    {% endif %}
+
+    <h4><a href="/payment">Voltar para o início</a></h4>
+{% endblock %}

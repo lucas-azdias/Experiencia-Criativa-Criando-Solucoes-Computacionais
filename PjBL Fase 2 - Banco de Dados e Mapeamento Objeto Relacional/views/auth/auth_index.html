@@ -1,0 +1,30 @@
+{% extends "template.html" %}
+
+{% import "utils/page_macros.html" as page_macros %}
+{% import "utils/form_macros.html" as form_macros %}
+
+{% block title %}
+<title>Login</title>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {{ page_macros.flash_verifier() }}
+    
+    {{ form_macros.formdivrow_start("auth", "md-auto") }}
+
+        {{ form_macros.form_start("form", "login") }}
+
+            {{ form_macros.title("Login") }}
+            {{ form_macros.input("Nome de usuário", id="username", name="username", type="text") }}
+            {{ form_macros.input("Senha de acesso", id="password", name="password", type="password") }}
+            {{ form_macros.button(label='Entrar') }}
+            {{ form_macros.endlabel("Ainda não cadastrado?", "register_user", is_link=true) }}
+
+        {{ form_macros.form_end() }}
+
+    {{ form_macros.formdivrow_end() }}
+
+    {{ page_macros.endlabel("Voltar ao início", "/", is_link=true) }}
+</div>
+{% endblock %}

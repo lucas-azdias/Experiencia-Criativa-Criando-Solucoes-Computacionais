@@ -1,0 +1,29 @@
+<!-- login.html -->
+{% extends "/auth/auth_index.html" %}
+{% block content %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    <div class="notification is-danger">
+        {{ messages[0] }}. Go to <a href="{{ url_for('auth.login') }}">login page</a>.
+    </div>
+{% endif %}
+{% endwith %}
+<form action="/auth/signup_post" class="signin-form" method="POST">
+    <div class="form-group mb-3">
+        <label class="label" for="username">Nome de usuário</label>
+        <input type="text" class="form-control" name="username" id = "username" placeholder="Nome de usuário" required>
+    </div>
+    <div class="form-group mb-3">
+        <label class="label" for="email">Email</label>
+        <input type="email" name = "email" id = "email"  class="form-control" placeholder="Insira seu email" required>
+    </div>
+    <div class="form-group mb-3">
+        <label class="label" for="password">Senha</label>
+        <input type="password" name = "password" id = "password" class="form-control" placeholder="Insira sua senha" required>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="form-control btn btn-primary rounded submit px-3">Registrar</button>
+    </div>
+</form>
+<p class="text-right"><a href="/">Voltar para a página inicial</a></p>
+{% endblock %}

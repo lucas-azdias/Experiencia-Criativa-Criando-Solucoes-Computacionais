@@ -1,0 +1,44 @@
+{% extends "template.html" %}
+
+{% import "utils/page_macros.html" as page_macros %}
+{% import "utils/form_macros.html" as form_macros %}
+
+{% block title %}
+<title>Sign-in</title>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {{ page_macros.flash_verifier() }}
+
+    {{ form_macros.formdivrow_start("register", col_size="12") }}
+
+        {{ form_macros.form_start("form", "add_user") }}
+
+            {{ form_macros.title("Cadastro") }}
+            {{ form_macros.input("Nome completo", id="name", name="name", type="text", box_size=6, has_box_size=true, is_end=false) }}
+            {{ form_macros.input("Nome de usuário", id="username", name="username", type="text", box_size=6, has_box_size=true, is_start=false) }}
+            {{ form_macros.input("E-mail", id="email", name="email", type="email", box_size=6, has_box_size=true, is_end=false) }}
+            {{ form_macros.input("Telefone", id="phone", name="phone", type="text", extra_params="maxlength=14", box_size=6, has_box_size=true, is_start=false) }}
+            {{ form_macros.input("Senha de acesso", id="password", name="password", type="password", box_size=6, has_box_size=true, is_end=false) }}
+            {{ form_macros.input("Confirmar senha", id="confirm_password", name="confirm_password", type="password", box_size=6, has_box_size=true, is_start=false) }}
+
+            {{ form_macros.br() }}
+
+            {{ form_macros.subtitle("Cartão de crédito") }}
+            {{ form_macros.input("Número de cartão de crédito", id="card_num_card", name="card_num_card", type="text", extra_params="maxlength=16", box_size=6, has_box_size=true, is_end=false) }}
+            {{ form_macros.input("Nome do titular", id="card_name_owner", name="card_name_owner", type="text", box_size=6, has_box_size=true, is_start=false) }}
+            {{ form_macros.input("CVV", id="card_cvv", name="card_cvv", type="text", extra_params="maxlength=3", box_size=6, has_box_size=true, is_end=false) }}
+            {{ form_macros.input("Data de validade", id="card_expire_date", name="card_expire_date", type="month", extra_params="min=" + current_month_year, box_size=6, has_box_size=true, is_start=false) }}
+
+            {{ form_macros.button(label='Cadastrar usuário') }}
+
+            {{ form_macros.endlabel("Já cadastrado?", "./", is_link=true) }}
+
+        {{ form_macros.form_end() }}
+
+    {{ form_macros.formdivrow_end() }}
+
+    {{ page_macros.endlabel("Voltar ao início", "/", is_link=true) }}
+</div>
+{% endblock %}

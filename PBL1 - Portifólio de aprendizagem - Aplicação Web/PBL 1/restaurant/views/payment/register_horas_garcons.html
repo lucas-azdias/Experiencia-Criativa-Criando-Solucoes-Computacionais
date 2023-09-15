@@ -1,0 +1,44 @@
+{% extends "payment/payment_index.html" %}
+
+{% block head %}
+    <script defer>
+        async function submitRegisterHorasGarcom() {
+            if (document.getElementById("id_garcom").value != "" && document.getElementById("num_horas").value != "") {
+                document.getElementById("cur_time").value = (new Date()).toLocaleString();
+
+                var dataForm = new FormData(document.getElementById("form"));
+
+                response = await fetch("save_horas_garcom", {
+                    method: "POST",
+                    body: dataForm
+                });
+
+                window.location.href = await response.text();
+            } else {
+                console.log("Valores inválidos.")
+            }
+        }
+    </script>
+{% endblock %}
+
+{% block content %}
+    <h2>Registrar horas dos garçons</h2>
+    {% if id_garcons|length != 0 %}
+        <form id="form" method="POST">
+            <p>
+                <select id="id_garcom" name="id_garcom">
+                    <option value="" selected disabled>ID do Garçom</option>
+                    {% for id_garcom in id_garcons %}
+                    <option value="{{ id_garcom }}">Garçom {{ id_garcom }}</option>
+                    {% endfor %}
+                </select>
+            </p>
+            <p><input type="number" id="num_horas" name="num_horas" placeholder="Quantidade de horas" min="0"></p>
+            <input type="hidden" id="cur_time" name="cur_time">
+            <button type="button" onclick="submitRegisterHorasGarcom('form', 'cur_time')">Registar horas do garçom</button>
+        </form>
+    {% else %}
+        <p>Não há garçons cadastrados.</p>
+    {% endif %}
+    <h4><a href="/payment">Voltar para o início</a></h4>
+{% endblock %}

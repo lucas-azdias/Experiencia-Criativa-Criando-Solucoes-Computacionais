@@ -1,0 +1,46 @@
+{% extends "template.html" %}
+
+{% block title %}
+<title>Listagem de meios de pagamentos</title>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row my-5 justify-content-center">
+        <div class="col-md-auto">
+            <div id="auth" class="container forms shadow-sm p-3 bg-white border border-secondary rounded">
+                <div class="row my-4">
+                    <div class="col mx-4">
+                        <h3>Listagem de pagamentos</h3>
+                    </div>
+                </div>
+                <div class="row my-4 mb-0 justify-content-center">
+                    <div class="col mx-4">
+                        <ul>
+                            {% if cards|length > 0 %}
+                                {% for k, v in cards|items %}
+                                    {% for card in v %}
+                                        <li>Usuário: {{ k }}; Nome do titular: {{ card[0] }}, ID do cartão: {{ card[1] }}, Data de vencimento: {{ card[2] }}, CVV: {{ card[3] }}</li>
+                                    {% endfor %}
+                                {% endfor %}
+                            {% else %}
+                                <p> Ainda não há dados registrados </p>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="row my-4 justify-content-center">
+                    <div class="col-md-auto">
+                        <span><a href="register_card">Cadastrar cartão de crédito</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row my-5 justify-content-center">
+        <div class="col-md-auto">
+            <span><a href="/">Voltar ao início</a></span>
+        </div>
+    </div>
+</div>
+{% endblock %}

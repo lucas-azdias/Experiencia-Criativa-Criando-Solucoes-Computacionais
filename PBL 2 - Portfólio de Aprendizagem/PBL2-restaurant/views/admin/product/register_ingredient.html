@@ -1,0 +1,42 @@
+{% extends "iot/iot_index.html" %}
+{% import 'utils/forms.html' as forms %}
+
+{% block main %}
+<main class="main">
+    
+    <div class="container-fluid px-4">
+    <h3 class="mt-4">Cadastro de Ingrediente</h3>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/admin/">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="/admin/product/ingredients">Ingrediente</a></li>
+        <li class="breadcrumb-item active">Cadastro de Ingrediente</li>
+    </ol>
+    <div class="vertical-center">
+        <div class="container view">
+            <div class="justify-content-center">
+                <div class="container-fluid px-4">
+                    <div class="row">
+                        <div class="vertical-center">
+                            <div class="container">
+                                <div class="card">
+                                    <div class="card-header">
+                                    Cadastrar Novo Ingrediente
+                                    </div>
+                                    <div class="card-body">
+                                        <form class="row g-3 justify-content-center" enctype="multipart/form-data" action="save_ingredient" method="POST">
+                                            {{ forms.input(label = 'Nome', name = 'name', id = 'name', type='text', box_size = 6) }}
+                                            {{ forms.input(label = 'Quantidade disponível', name = 'available_quantity', id = 'available_quantity', type='number', box_size = 3) }}
+                                            <div class="col-md-3"></div>
+                                            {{ forms.button(label = 'Cadastrar Ingrediente', box_size = 12) }}
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

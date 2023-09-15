@@ -1,0 +1,67 @@
+{% extends "template.html" %}
+
+{% block title %}
+<title>Cadastrar de meios de pagamentos</title>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row my-5 justify-content-center">
+        <div class="col-md-auto">
+            <div id="auth" class="container forms shadow-sm p-3 bg-white border border-secondary rounded">
+                <form id="form" action="add_card" method="POST" class="mx-3 mb-0 justify-content-center">
+                    <div class="row my-4">
+                        <div class="col mx-4">
+                            <h3>Cadastro de pagamento</h3>
+                        </div>
+                    </div>
+                    <div class="row my-3">
+                        <div class="col mx-4">
+                            <label for="username" class="form-label">Nome de usuário</label>
+                            <input type="text" id="username" name="username" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row my-3">
+                        <div class="col mx-4">
+                            <label for="name_card" class="form-label">Nome do titular</label>
+                            <input type="text" id="name_card" name="name_card" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row my-3">
+                        <div class="col mx-4">
+                            <label for="id_card" class="form-label">ID do cartão</label>
+                            <input type="text" id="id_card" name="id_card" class="form-control" maxlength="16" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                        </div>
+                    </div>
+                    <div class="row my-3">
+                        <div class="col mx-4">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="exp_date" class="form-label">Data de vencimento</label>
+                                    <input type="month" id="exp_date" name="exp_date" class="form-control">
+                                </div>
+                                <div class="col-2"></div>
+                                <div class="col-4">
+                                    <label for="cvv" class="form-label">CVV</label>
+                                    <input type="text" id="cvv" name="cvv" class="form-control" maxlength="3">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row my-4 mb-0">
+                        <div class="col mx-4 d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary">Cadastrar cartão de crédito</button>
+                        </div>
+                    </div>
+                    <div class="my-4"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row my-5 justify-content-center">
+        <div class="col-md-auto">
+            <span><a href="/">Voltar ao início</a></span>
+        </div>
+    </div>
+</div>
+{% endblock %}

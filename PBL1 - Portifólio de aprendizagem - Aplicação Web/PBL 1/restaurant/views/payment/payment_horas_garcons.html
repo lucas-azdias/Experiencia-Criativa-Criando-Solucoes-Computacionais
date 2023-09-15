@@ -1,0 +1,143 @@
+{% extends "payment/payment_index.html" %}
+
+{% block head %}
+    <script defer>
+        async function getHrsGarcomById() {
+            var formIdGarcom = document.getElementById("formIdGarcom");
+            var num_horas = document.getElementById("num_horas");
+            var valor = document.getElementById("valor");
+            var valor_num = document.getElementById("valor_num");
+
+            if (document.getElementById("id_garcom_select").value != "") {
+                var dataForm = new FormData(formIdGarcom);
+
+                var response = await fetch("get_hrs_garcom_by_id", {
+                    method: "POST",
+                    body: dataForm
+                });
+
+                var hrs_garcom = JSON.parse(await response.text());
+
+                if (hrs_garcom.length > 0) {
+                    var response = await fetch("get_valor_hora_garcom_by_id", {
+                        method: "POST",
+                        body: dataForm
+                    });
+
+                    var valor_hora = JSON.parse(await response.text())[1];
+
+                    var val = 0;
+                    
+                    var content = '<ul>';
+                    for (let i = 0; i < hrs_garcom.length; i++) {
+                        content += '<li>' + hrs_garcom[i][1] + 'hrs - ' + hrs_garcom[i][2] + '</li>';
+                        val += parseFloat(hrs_garcom[i][1]);
+                    }
+                    val *= parseFloat(valor_hora)
+                    content += '</ul>';
+                    num_horas.innerHTML = content;
+                    
+                    content = 'TOTAL: R$' + val.toFixed(2) + ' (Valor-hora é R$' + parseFloat(valor_hora).toFixed(2) + ')';
+                    valor.innerHTML = content;
+
+                    if (num_horas.hasAttribute("hidden")) {
+                        num_horas.removeAttribute("hidden");
+                    }
+
+                    if (valor.hasAttribute("hidden")) {
+                        valor.removeAttribute("hidden");
+                    }
+
+                    valor_num.value = val;
+                } else {
+                    console.log("Não há horas registradas para o garçom passado.")
+
+                    if (num_horas.hasAttribute("hidden")) {
+                        num_horas.removeAttribute("hidden");
+                    }
+                    num_horas.innerHTML = 'Não há horas registradas para o garçom passado.';
+
+                    if (!valor.hasAttribute("hidden")) {
+                        valor.setAttribute("hidden", "");
+                    }
+                    valor.innerHTML = "";
+
+                    valor_num.value = null;
+                }
+            } else {
+                console.log("Valores inválidos.")
+
+                if (!num_horas.hasAttribute("hidden")) {
+                    num_horas.setAttribute("hidden", "");
+                }
+                num_horas.innerHTML = "";
+
+                if (!valor.hasAttribute("hidden")) {
+                    valor.setAttribute("hidden", "");
+                }
+                valor.innerHTML = "";
+
+                valor_num.value = null;
+            }
+        }
+        
+        async function submitEfetuarPagamentoGarçom() {
+            if (document.getElementById("id_garcom_select").value != "" && document.getElementById("valor").innerHTML != "") {
+                document.getElementById("id_garcom").value = document.getElementById("id_garcom_select").value;
+                document.getElementById("cur_time").value = (new Date()).toLocaleString();
+
+                var dataForm = new FormData(document.getElementById("form"));
+
+                response = await fetch("save_payment_horas_garcom", {
+                    method: "POST",
+                    body: dataForm
+                });
+
+                window.location.href = await response.text();
+            } else {
+                console.log("Valores inválidos.")
+            }
+        }
+    </script>
+{% endblock %}
+
+{% block content %}
+    <h2>Efetuar pagamento - garçom</h2>
+    {% if id_garcons|length != 0 %}
+        <form id="formIdGarcom" method="POST">
+            <p>
+                <select id="id_garcom_select" name="id_garcom_select" onchange="getHrsGarcomById()">
+                    <option value="" selected disabled>Selecione o ID do garçom</option>
+                    {% for id_garcom in id_garcons %}
+                    <option value="{{ id_garcom }}">Garçom {{ id_garcom }}</option>
+                    {% endfor %}
+                </select>
+            </p>
+        </form>
+        <form id="form" method="POST">
+            <p id="num_horas" hidden></p>
+            <p id="valor" hidden></p>
+            <input type="hidden" id="id_garcom" name="id_garcom">
+            <input type="hidden" id="valor_num" name="valor_num">
+            <input type="hidden" id="cur_time" name="cur_time">
+            <button type="button" onclick="submitEfetuarPagamentoGarçom()">Efetuar pagamento do garçom</button>
+        </form>
+    {% else %}
+        <p>Não há garçons cadastrados.</p>
+    {% endif %}
+
+    <h2>Horas pagas dos garçons</h2>
+    {% if pagos|length != 0 %}
+        <p>
+            <ul>
+                {% for pago in pagos|sort %}
+                <li>Garçom {{ pago[0] }}: {{ pago[1] }}hrs - {{ pago[1] * pago[2] }} reais (Pagas em: {{ pago[3] }})</li>
+                {% endfor %}
+            </ul>
+        </p>
+    {% else %}
+        <p>Não há horas pagas registradas.</p>
+    {% endif %}
+
+    <h4><a href="/payment">Voltar para o início</a></h4>
+{% endblock %}

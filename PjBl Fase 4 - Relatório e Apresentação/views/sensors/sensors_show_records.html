@@ -1,0 +1,86 @@
+{% extends "template.html" %}
+
+{% import "utils/page_macros.html" as page_macros %}
+{% import "utils/form_macros.html" as form_macros %}
+
+{% block title %}
+<title>Selecionar Planta</title>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {{ page_macros.flash_verifier() }}
+    <div class="container forms shadow-sm p-3 bg-white border border-secondary rounded">
+
+      <div class="form-group">
+        <form action="show_records" method="GET">
+          {% if sensors|length > 0 %}
+          <label for="id_sensor_selected">Escolha uma opção:</label>
+          <select class="form-control" id="id_sensor_selected" name="id_sensor_selected">
+            <option value="" selected disabled>Selecione o Sensor</option>
+            {% for sensor in sensors %}
+            <option value="{{ sensor.id_sensor }}"> {{ sensor.name }}</option>
+            {% endfor %}
+          </select>
+          <button type="submit">Atualizar registros</button>
+          {% else %}
+            <p> Ainda não há sensores registrados </p>
+            <span><a href="register_sensor">Inserir sensor</a></span> <br>
+          {% endif %}
+        </form>
+      </div>
+    
+      <div class="row my-2 justify-content-center">
+        {% if records != None %}
+          {% if records|length >= 1 %}
+            <div class="col-md-6 justify-content-center shadow-sm p-3 bg-white border border-secondary rounded">
+                <h3 class="text-center mb-0 ">Ultimo Registro : {{ records[records|length - 1].register_date }} </h3>
+                <div class="shadow-sm p-3 bg-white border border-secondary rounded">
+                    <ul>
+                        <p class="text-left mb-0 "> Registros anteriores </p>
+                        {% for record in records %}
+                        <li>{{ record.register_date }} ID: {{record.id_record}} Valor:{{record.value}}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+          {% else %}
+            <p class="text-left mb-0 ">Não há registros para esse sensor</p>
+          {% endif %}
+        {% endif %}
+      </div>
+
+      {% if sensors|length > 0 %}
+      <form action="add_record" method="POST">
+        {{ form_macros.title("Inserir Registro no sensor") }}
+        <select class="form-control" id="id_sensor" name="id_sensor">
+          <option value="" selected disabled>Selecione o Sensor</option>
+          {% for sensor in sensors %}
+          <option value="{{ sensor.id_sensor }}"> {{ sensor.name }}</option>
+          {% endfor %}
+        </select>
+        {{ form_macros.other_input("Valor", id="value", name="value", type="number") }}
+        <button type="submit">Cadastrar registro</button>
+      </form>
+
+
+      {% if records != None %}
+        {% if records|length >= 1 %}
+          <form action="update_record" method="POST">
+            {{ form_macros.title("Atualizar um regsitro no sensor") }}
+            <select class="form-control" id="id_record" name="id_record">
+              <option value="" selected disabled>Selecione o Sensor</option>
+              {% for record in records %}
+              <option value="{{ record.id_record }}"> {{ record.id_record }}</option>
+              {% endfor %}
+            </select>
+            {{ form_macros.other_input("Valor", id="value", name="value", type="number") }}
+            <button type="submit">Cadastrar registro</button>
+          </form>
+        {% endif %}
+      {% endif %}
+      {% endif %}
+      
+    </div>
+</div>
+{% endblock content %}

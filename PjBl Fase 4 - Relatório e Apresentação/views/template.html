@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    
+    <head>
+        {% block title %}
+        <title>Gerenciador de Jardins</title>
+        {% endblock %}
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Favicons -->
+        <link href="/static/img/planta_t.png" rel="icon">
+        <link href="/static/img/apple-touch-icon.png" rel="apple-touch-icon">
+        
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+        
+        <!-- CSS Files -->
+        <link href="/static/css/vendor/aos.css" rel="stylesheet">
+        <link href="/static/css/vendor/bootstrap.min.css" rel="stylesheet">
+        <link href="/static/css/vendor/bootstrap-icons.css" rel="stylesheet">
+        <link href="/static/css/vendor/boxicons.min.css" rel="stylesheet">
+        <link href="/static/css/vendor/glightbox.min.css" rel="stylesheet">
+        <link href="/static/css/vendor/swiper-bundle.min.css" rel="stylesheet">
+
+        <!-- Template Main CSS File -->
+        <link href="/static/css/style.css" rel="stylesheet">
+        <link href="/static/css/bootstrap_changes.css" rel="stylesheet">
+
+        {% block head %}
+        {% endblock %}
+    </head>
+
+    <body>
+        <!-- ======= Header ======= -->
+        {% include "header.html" %}
+        <!-- End Header -->
+        
+        <div id="content" class="pt-4 px-4 d-flex">
+            {% block content %}
+            {% endblock %}
+        </div>
+             
+    </body>
+
+    <!-- JS Files -->
+    <script src="/static/js/vendor/aos.js"></script>
+    <script src="/static/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/vendor/glightbox.min.js"></script>
+    <script src="/static/js/vendor/isotope.pkgd.min.js"></script>
+    <script src="/static/js/vendor/swiper-bundle.min.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/utils.js"></script>
+
+</html>

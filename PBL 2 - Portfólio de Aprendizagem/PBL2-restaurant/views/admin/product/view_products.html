@@ -1,0 +1,65 @@
+{% extends "iot/iot_index.html" %}
+{% block main %}
+<main>
+    <div class="container-fluid px-4">
+        <h2 class="mt-4">Listagem de Produtos</h2>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active"><a href="/admin/">Dashboard</a></li>
+            <li class="breadcrumb-item active"><a href="/admin/product/products">Produto</a></li>
+            <li class="breadcrumb-item active">Lista de Produtos</li>
+        </ol>
+        <div class="vertical-center">
+            <div class="container view">
+                <div class="justify-content-center">
+                    <div class="card">
+                        <div class="card-body">
+                            {% with messages = get_flashed_messages(with_categories=true) %}
+                                {% if messages %}
+                                    {% for category, message in messages %}
+                                    <div class="alert alert-{{ category }} alert-dismissible">
+                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                        {{ message }}
+                                    </div>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endwith %}
+                            <table id="view_sensors" class="table table-striped table-bordered" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Preço atual</th>
+                                        <th>Quantidade disponível</th>
+                                        <th>Descrição</th>
+                                        <th>Ingredientes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for product in products %}
+                                    <tr>
+                                        <td>{{ product.name }}</td>
+                                        <td>{{ product.current_price }}</td>
+                                        <td>{{ product.available_quantity }}</td>
+                                        <td>{{ product.description }}</td>
+                                        <td>
+                                            {% if product.ingredients|length > 0 %}
+                                                {% for ingredient in product.ingredients %}
+                                                    {{ ingredient.name }}
+                                                {% endfor %}
+                                            {% else %}
+                                                Ingredientes não cadastrados
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

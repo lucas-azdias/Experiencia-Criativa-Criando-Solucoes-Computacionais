@@ -1,0 +1,60 @@
+{% extends "iot/iot_index.html" %}
+{% import 'utils/forms.html' as forms %}
+
+{% block main %}
+<main class="main">
+    
+    <div class="container-fluid px-4">
+    <h3 class="mt-4">Cadastro de Produto</h3>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/admin/">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="/admin/product/products">Produtos</a></li>
+        <li class="breadcrumb-item active">Cadastro de Produto</li>
+    </ol>
+    <div class="vertical-center">
+        <div class="container view">
+            <div class="justify-content-center">
+                <div class="container-fluid px-4">
+                    <div class="row">
+                        <div class="vertical-center">
+                            <div class="container">
+                                <div class="card">
+                                    <div class="card-header">
+                                    Cadastrar Novo Produto
+                                    </div>
+                                    <div class="card-body">
+                                        <form class="row g-3 justify-content-center" enctype="multipart/form-data" action="save_product_ingredients" method="POST">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label for="{{ id }}" class="form-label">Selecionar produto</label>
+                                                    <select class="form-select" id="id_product" name="id_product">
+                                                        <option selected></option>
+                                                        {% for product in products %}
+                                                        <option value={{ product.id }}>{{ product.name }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="{{ id }}" class="form-label">Selecionar ingrediente</label>
+                                                    <select class="form-select" id="id_ingredient" name="id_ingredient">
+                                                        <option selected></option>
+                                                        {% for ingredient in ingredients %}
+                                                        <option value={{ ingredient.id }}>{{ ingredient.name }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                                <div class="my-2"></div>
+                                                {{ forms.button(label = 'Ligar produto e ingrediente', box_size = 12) }}
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

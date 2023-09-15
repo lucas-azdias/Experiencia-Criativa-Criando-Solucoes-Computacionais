@@ -1,0 +1,32 @@
+<header id="header" class="d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+        <div class="logo">
+            <a href="/"><img src="../static/img/planta_t.png" alt="" class="img-fluid"></a>
+        </div>
+        <nav id="navbar" class="navbar">
+            <ul>
+                <li><a class="nav-link scrollto active" href="/">Home</a></li>
+                {% if not current_user.is_authenticated %}
+                <li><a class="nav-link scrollto" href="/auth">Login</a></li>
+                {% else %}
+                <li><a class="nav-link scrollto" href="/plants">Plantas</a></li>
+                <li><a class="nav-link scrollto" href="/sensors">Sensores</a></li>
+                <li><a class="nav-link scrollto" href="/payment">Pagamento</a></li>
+                <li>
+                    <a class="nav-link scrollto dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Olá, &nbsp <span class="active">{{ current_user.username }}</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        {% if current_user.is_admin %}
+                        <a class="dropdown-item" href="/admin/users_manager">Gerenciar usuários</a>
+                        <a class="dropdown-item" href="/admin/payments_manager">Gerenciar pagamentos</a>
+                        {% endif %}
+                        <a class="dropdown-item" href="/auth/logout">Logout</a>
+                    </div>
+                </li>
+                {% endif %}
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+    </div>
+</header>

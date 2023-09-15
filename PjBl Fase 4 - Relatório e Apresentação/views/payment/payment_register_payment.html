@@ -1,0 +1,33 @@
+{% extends "template.html" %}
+
+{% import "utils/page_macros.html" as page_macros %}
+{% import "utils/form_macros.html" as form_macros %}
+
+{% block title %}
+<title>Cadastrar pagamento</title>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {{ page_macros.flash_verifier() }}
+
+    {{ form_macros.formdivrow_start("payment_register", col_size="md-auto") }}
+
+        {{ form_macros.form_start("form", "add_payment") }}
+
+            {{ form_macros.title("Cadastrar pagamento") }}
+            {{ form_macros.subtitle("Valor a pagar: R$ " + month_signing_value) }}
+
+            {{ form_macros.button(label='Confirmar pagamento') }}
+
+            {{ form_macros.br() }}
+
+        {{ form_macros.form_end() }}
+
+    {{ form_macros.formdivrow_end() }}
+
+    {{ page_macros.endbutton("Mostrar pagamentos", "goTo('/payment/')") }}
+
+    {{ page_macros.endlabel("Voltar ao início", "/", is_link=true) }}
+</div>
+{% endblock %}

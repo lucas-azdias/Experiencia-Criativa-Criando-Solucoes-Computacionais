@@ -1,0 +1,41 @@
+{% extends "template.html" %}
+
+{% import "utils/page_macros.html" as page_macros %}
+{% import "utils/form_macros.html" as form_macros %}
+
+{% block title %}
+<title>Gerenciador de pagamentos</title>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {{ page_macros.flash_verifier() }}
+
+    {{ form_macros.formdivrow_start("payments_manager", col_size="12") }}
+
+        {{ form_macros.title("Gerenciador de pagamentos") }}
+
+        {{ page_macros.table(
+            ["Nome de usuário", "Valor", "Ano/Mês", "Status", "Data do pagamento", "Número de cartão de crédito", "Nome do titular", "CVV", "Data de validade"],
+            users_payments_info
+        ) }}
+
+        {{ form_macros.br() }}
+
+        {{ form_macros.form_start("form", "add_payment") }}
+
+            {{ form_macros.subtitle("Cadastro de pagamento") }}
+            {{ form_macros.select(usernames_options, label="Nome de usuário", placeholder="", id="username", name="username", box_size=6, has_box_size=true, is_end=false) }}
+            {{ form_macros.input("Data do pagamento", id="date", name="date", type="month", box_size=6, has_box_size=true, is_start=false) }}
+
+            {{ form_macros.button(label='Cadastrar pagamento') }}
+
+            {{ form_macros.br() }}
+
+        {{ form_macros.form_end() }}
+
+    {{ form_macros.formdivrow_end() }}
+
+    {{ page_macros.endlabel("Voltar ao início", "/", is_link=true) }}
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "template.html" %}
+
+{% import "utils/page_macros.html" as page_macros %}
+{% import "utils/form_macros.html" as form_macros %}
+
+
+{% block title %}
+<title>Criar planta</title>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {{ page_macros.flash_verifier() }}
+
+    {{ form_macros.formdivrow_start("register_plant", "6") }}
+
+        {{ form_macros.form_start("form", "save_plant") }}
+
+            {{ form_macros.title("Cadastrar planta") }}
+            {{ form_macros.other_input("Nome da Planta", id="name", name="name", type="text") }}
+
+            {{ form_macros.render_sensor_select(sensors) }}
+    
+            {{ form_macros.other_input("Umidade mínima", id="min_humidity", name="min_humidity", type="text") }}
+
+            {{ form_macros.button(label='Criar') }}
+
+        {{ form_macros.form_end() }}
+
+    {{ form_macros.formdivrow_end() }}
+
+    {{ page_macros.endlabel("Voltar ao início", "/", is_link=true) }}
+</div>
+{% endblock %}
+

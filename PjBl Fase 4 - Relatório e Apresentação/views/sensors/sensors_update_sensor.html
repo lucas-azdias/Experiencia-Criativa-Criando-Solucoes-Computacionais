@@ -1,0 +1,34 @@
+{% extends "template.html" %}
+
+{% import "utils/page_macros.html" as page_macros %}
+{% import "utils/form_macros.html" as form_macros %}
+
+{% block title %}
+<title>Criar Sensor</title>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {{ page_macros.flash_verifier() }}
+
+    {{ form_macros.formdivrow_start("register_sensor", "6") }}
+
+        {{ form_macros.form_start("form", "update_sensor") }}
+        {% if sensor != None %}
+            {{ form_macros.title("Inserir Sensor") }}
+            <label class="form-label">Id do sensor</label>
+            <input type="text" name="id_sensor" class="form-control" value="{{sensor.id_sensor}}" readonly="readonly" />
+            {{ form_macros.other_input("Nome do Sensor", id="name", name="name", type="text" ,value= sensor.name ) }}
+            {{ form_macros.other_input("Modelo", id="model", name="model", type="text",value= sensor.model ) }}
+            {{ form_macros.other_input("Marca", id="brand", name="brand", type="text",value= sensor.brand ) }}
+            {{ form_macros.other_input("Unidade", id="measure", name="measure", type="text",value= sensor.measure ) }}
+            {{ form_macros.other_input("Tensao", id="voltage", name="voltage", type="text",value= sensor.voltage ) }}
+            {{ form_macros.button(label='Atualizar') }}
+        {% endif %}
+        {{ form_macros.form_end() }}
+
+    {{ form_macros.formdivrow_end() }}
+
+    {{ page_macros.endlabel("Voltar ao início", "/", is_link=true) }}
+</div>
+{% endblock %}
